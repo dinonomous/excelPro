@@ -9,7 +9,7 @@ from gemini_module import create_model, send_message
 model = create_model()
 
 # Extract text from the PDF file
-pdf_path = 'Resume.pdf'
+pdf_path = '/home/dinesh/Documents/Spring/demo/excelPro/excelPro/Resume.pdf'
 text = extract_text(pdf_path)
 
 # Example text with special characters
