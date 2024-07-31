@@ -9,7 +9,7 @@ from gemini_module import create_model, send_message
 model = create_model()
 
 # Extract text from the PDF file
-pdf_path = 'demo2.pdf'
+pdf_path = 'Resume.pdf'
 text = extract_text(pdf_path)
 
 # Example text with special characters
@@ -25,6 +25,7 @@ pattern = re.compile(r'[^\x20-\x7E]')
 text_replaced = pattern.sub('->', text_with_special_chars)
 response = send_message(model, text_replaced )
 
+# Input string
 input_string = response
 
 # Use StringIO to treat the string as a file-like object
@@ -35,5 +36,4 @@ df = pd.read_csv(data)
 
 # Write the DataFrame to a CSV file
 df.to_csv("output.csv", index=False)
-
 print("String written to output.csv")
