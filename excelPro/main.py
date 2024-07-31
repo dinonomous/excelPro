@@ -1,5 +1,6 @@
 import re
 import pandas as pd
+from io import StringIO
 from pdfminer.high_level import extract_text
 from gemini_module import create_model, send_message
 
@@ -8,7 +9,7 @@ from gemini_module import create_model, send_message
 model = create_model()
 
 # Extract text from the PDF file
-pdf_path = 'Resume.pdf'
+pdf_path = 'demo2.pdf'
 text = extract_text(pdf_path)
 
 # Example text with special characters
@@ -24,10 +25,13 @@ pattern = re.compile(r'[^\x20-\x7E]')
 text_replaced = pattern.sub('->', text_with_special_chars)
 response = send_message(model, text_replaced )
 
+input_string = response
 
+# Use StringIO to treat the string as a file-like object
+data = StringIO(input_string)
 
-# Convert the string into a DataFrame
-df = pd.DataFrame([response], columns=["Text"])
+# Read the string into a DataFrame
+df = pd.read_csv(data)
 
 # Write the DataFrame to a CSV file
 df.to_csv("output.csv", index=False)
